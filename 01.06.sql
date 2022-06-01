@@ -58,3 +58,13 @@ AS
 Begin
     DELETE FROM Authors WHERE Authors.Id=@id;
 END
+
+
+CREATE VIEW usv_AuthorInfo
+AS
+SELECT a.Id, a.Name+' '+a.Surname FullName,Count(*) BooksCount, Max(b.PageCount) MaxPageCount
+FROM Authors a
+Join Books b
+ON a.Id = b.AuthorId
+Group by a.Id,a.Name,a.Surname
+Group by a.Id
