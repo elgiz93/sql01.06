@@ -31,3 +31,30 @@ Begin
     Join Authors a ON b.AuthorId=a.Id where b.Name like '%'+@name+'%' and a.Name+' '+a.Surname like '%'+@author+'%'
 END
 
+create procedure usp_InsertAuthorData
+@name nvarchar(25),
+@surname nvarchar(25)
+AS
+Begin
+    INSERT INTO Authors (Name,Surname)
+VALUES (@name,@surname);
+END
+
+create procedure usp_UpdateAuthorData
+@id int,
+@name nvarchar(25),
+@surname nvarchar(25)
+AS
+Begin
+    UPDATE Authors
+  SET Name = @name, Surname = @surname
+WHERE Authors.Id=@id;
+END
+
+
+create procedure usp_DeleteAuthorData
+@id int
+AS
+Begin
+    DELETE FROM Authors WHERE Authors.Id=@id;
+END
